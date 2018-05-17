@@ -1,0 +1,13 @@
+{
+  "language_code": "en_UK",
+  "language_flag": ":flag_gb:",
+  "language_full": "English (United Kingdom)",
+  
+  "commands": {
+    "general_error": "The command just tried and failed. Reported to my owner.",
+    "ping": {
+      "start": ":ping_pong: Pinging...",
+      "edited": ":ping_pong: Pong! {{{ ping }}}ms"
+    }
+  }
+}
