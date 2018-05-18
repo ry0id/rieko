@@ -1,0 +1,25 @@
+{
+  "name": "rieko",
+  "version": "0.0.1",
+  "description": "Rieko Discord Bot.",
+  "main": "src/bot/index.js",
+  "scripts": {
+    "start": "node src/bot/index.js"
+  },
+  "dependencies": {
+    "eris": "^0.8.5",
+    "snekfetch": "^4.0.0",
+    "quick.db": "^6.2.1",
+    "path": "^0.12.7",
+    "i18n": "^0.8.3",
+    "express": "^4.16.3"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MurfCode/rieko.git"
+  },
+  "license": "MIT"
+}

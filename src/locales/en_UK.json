@@ -1,0 +1,18 @@
+{
+  "language_code": "en_UK",
+  "language_flag": ":flag_gb:",
+  "language_full": "English (United Kingdom)",
+  
+  "commands": {
+    "general_error": "The command just tried and failed. Reported to my owner.",
+    "general_notOwner": ":x: Who do you think you are? {{{ command }}} is a command made for the owner only.",
+    "ping": {
+      "start": ":ping_pong: Pinging...",
+      "edited": ":ping_pong: Pong! {{{ ping }}}ms"
+    },
+    "help": {
+      "content": "If you need anymore help on a specific command, do {{{ prefix }}}help [command].To get even futher support do {{{ prefix }}}support and it will give you the link to the support server.",
+      "content_command": ":pencil: Help for command, `{{{ command }}}`"
+    }
+  }
+}
