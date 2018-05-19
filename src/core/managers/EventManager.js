@@ -13,8 +13,8 @@ class EventManager {
       if (error) throw error;
       for (let i = 0; i < events.length; i++) {
         const event = require(path.join(this.path, events[i]));
-				event(this.client, this.db);
-			}
+	   event(this.client, this.db);
+	}
     });
   }
 }
