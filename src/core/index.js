@@ -4,4 +4,6 @@ module.exports = {
   CommandManager: require('./managers/CommandManager'),
   EventManager: require('./managers/EventManager'),
   resolveUser: require('./resolvers/ResolveUser'),
+  ManipulationManager: require('./managers/ManipulationManager'),
+  messageCollector: require('./utils/messageCollector'),
 }

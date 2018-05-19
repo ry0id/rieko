@@ -25,6 +25,7 @@ module.exports = (bot, db) => {
 		const commands = bot.commands.filter((c) => c.command === command || c.aliases.includes(command));
 		const args = msg.content.replace(/ {2,}/g, ' ').replace(prefix, '').split(' ').slice(1);
     if (commands.length > 0) {
+      if (commands[0].ownerOnly && msg.author.id !== '425004634587791380') return msg.channel.createMessage(msg.__('commands.general_notOwner'));
       try {
         commands[0].load(msg, args);
       } catch (err) {
