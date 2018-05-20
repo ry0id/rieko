@@ -3,11 +3,45 @@
   "language_flag": ":flag_gb:",
   "language_full": "English (United Kingdom)",
   
-  "commands": {
-    "general_error": "The command just tried and failed. Reported to my owner.",
-    "ping": {
-      "start": ":ping_pong: Pinging...",
-      "edited": ":ping_pong: Pong! {{{ ping }}}ms"
-    }
-  }
+	"commands": {
+		"ping": {
+			"start": ":ping_pong: Pinging...",
+			"edited": ":ping_pong: Pong! {{{ ping }}}ms"
+		},
+		"support": {
+			"title": "How to get support with Rieko?",
+			"description": "You want even more support with Rieko, look down to get help.",
+			"fields": {
+				"name": "<:ui_burger:447377504974667796> Link",
+				"value": "Support server: [Click me](https://discord.gg/8xAkM7u)"
+			}
+		},
+    "stats": {
+      "title": "Rieko's Stats",
+      "fields": {
+        "one": {
+          "name": "<:ui_i:447351491792207872> Versions"
+        },
+        "two": {
+          "name": "<:ui_li:447380031870730271> Guild, Channels & Users"
+        },
+        "third": {
+          "name": "<:ui_graph:447381653694840842> Memory Usage"
+        },
+        "forth": {
+          "name": "<:ui_clock:447381653648572427> Uptime"
+        }
+      }
+    },
+    "balance": {
+      "content": "**{{{ username }}#{{{ discrim }}**'s balance",
+      "unknown": "<:ui_question:447456651998527499> Unable to find a user by that name"
+    },
+    "profile": {
+      "content": "**{{{ username }}#{{{ discrim }}**'s profile",
+      "unknown": "<:ui_question:447456651998527499> Unable to find a user by that name"
+    },
+		"general_request": "Requested by {{{ username }}}#{{{ discrim }}}",
+    "general_commands": "{{{ size }}} Commands"
+	},
 }
