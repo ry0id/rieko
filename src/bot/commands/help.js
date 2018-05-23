@@ -17,7 +17,8 @@ class Help extends Command {
       ],
       hidden: false,
       ownerOnly: false,
-      nsfwOnly: false
+      nsfwOnly: false,
+      cooldown: 30e3
     });
     this.bot = bot;
     this.db = db;
@@ -26,16 +27,32 @@ class Help extends Command {
   load(msg, args) {
     if (!args[0]) {
       const categories = {};
-      const cate = { General: '<:ui_star:447130204557541376> General', Utility: '<:ui_i:447351491792207872> Utility', };
+      const cate = { 
+        General: '<:ui_star:447130204557541376> General', 
+        Utility: '<:ui_i:447351491792207872> Utility',
+        Profile: '<:ui_person:447698416265461760> Profile',
+        Developer: '<:ui_settings:447870689823948807> Developer'
+      };
       
-      this.bot.commands.filter(cmd => !cmd.hidden).forEach((cmd) => {
-        let category = categories[cmd.category];
+      if (msg.author.id !== '425004634587791380') {
+        this.bot.commands.filter(cmd => !cmd.hidden).forEach((cmd) => {
+          let category = categories[cmd.category];
 
-        if (!category) {
+          if (!category) {
             category = categories[cmd.category] = [];
-        }
-        category.push(cmd.command);
-      });
+          }
+          category.push(cmd.command);
+        });
+      } else {
+        this.bot.commands.forEach((cmd) => {
+          let category = categories[cmd.category];
+          
+          if (!category) {
+            category = categories[cmd.category] = [];
+          }
+          category.push(cmd.command);
+        });
+      }
       
       msg.channel.createMessage({
         embed: {
@@ -94,4 +111,5 @@ class Help extends Command {
     }
   }
 }
+
 module.exports = Help;
