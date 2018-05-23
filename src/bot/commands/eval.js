@@ -15,7 +15,8 @@ class Eval extends Command {
       ],
       hidden: true,
       ownerOnly: true,
-      nsfwOnly: false
+      nsfwOnly: false,
+      cooldown: 30e3
     });
     this.bot = bot;
     this.db = db;
@@ -23,27 +24,35 @@ class Eval extends Command {
   }
   
   async load(msg, args) {
+    const delarray = [];
+    const cleanup = async () => {
+      if (msg.channel.type === 0 && msg.channel.permissionsOf(this.bot.user.id).has('manageMessages')) {
+        msg.channel.deleteMessages(delarray);
+      }
+    };
     let toEval;
     if (args.length === 0) {
-      msg.channel.createMessage(':x: Type some code down here.');
+      msg.channel.createMessage(':x: Type some code down here.')
+      .then(m => delarray.push(m.id));
       const awaitEval = await this.bot.messageCollector.awaitMessage(msg.channel.id, msg.author.id, 60000);
       if (!awaitEval || awaitEval.content.toLowerCase() === 'cancel' || awaitEval.content.toLowerCase() === 'c') {
         return msg.channel.createMessage('<:ui_x:447144294415990789> Prompt timed out.')
       } else if (!awaitEval.cleanContent) {
         return msg.channel.createMessage('<:ui_x:447144294415990789> Only text works.');
+      } 
       toEval = awaitEval.content;
     } else { toEval = args.join(' ') }
     try {
       let result = eval(toEval);
       result = util.inspect(result);
-      result = result.replace('this.bot.token', '+=+=+=+=BOT TOKEN+=+=+=+=');
-      result = result.replace('process.env.TOKEN', '+=+=+=+=BOT TOKEN+=+=+=+=');
+      result = result.replace(new RegExp('this.bot.token', 'g'), '+=+=+=+=BOT TOKEN+=+=+=+=');
+      result = result.replace(new RegExp(process.env.TOKEN, 'g'), '+=+=+=+=BOT TOKEN+=+=+=+=');
       msg.addReaction(':ui_tick:447144175490826260');
       if (result.length > 1992) {
         uploadToHastebin(result).then((url) => {
           msg.channel.createMessage({ 
             embed: {
-              title: '<:ui_tick:447144175490826260> The code has been evaled.',
+              title: 'The code has been evaled.',
               fields: [
                 {
                   name: '<:ui_input:447128893128835073> Input',
@@ -63,7 +72,7 @@ class Eval extends Command {
       } else {
         msg.channel.createMessage({ 
             embed: {
-              title: '<:ui_tick:447144175490826260> The code has been evaled.',
+              title: 'The code has been evaled.',
               fields: [
                 {
                   name: '<:ui_input:447128893128835073> Input',
@@ -82,7 +91,7 @@ class Eval extends Command {
       msg.addReaction(':ui_x:447144294415990789');
       msg.channel.createMessage({ 
         embed: {
-          title: '<:ui_x:447144294415990789> ERROR',
+          title: 'ERROR',
           fields: [
             {
               name: '<:ui_input:447128893128835073> Input',
@@ -97,6 +106,7 @@ class Eval extends Command {
         }
       });
     }
+    cleanup();
   }
 }
 

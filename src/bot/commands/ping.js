@@ -4,20 +4,22 @@ class Ping extends Command {
   constructor(bot, db) {
     super({
       command: 'ping',
-      category: 'Utility',
+      category: 'General',
       aliases: [
         'pong'
       ],
       description: 'Pong!',
       usage: '{{ prefix }}ping',
       examples: [
-        '{{ prefix }}ping'
+        'ping'
       ],
-      hidden: false
+      hidden: false,
+      ownerOnly: false,
+      nsfwOnly: false,
+      cooldown: 30e3
     });
     this.bot = bot;
     this.db = db;
-    this.i18n = require('i18n');
   }
   
   load(msg) { 
