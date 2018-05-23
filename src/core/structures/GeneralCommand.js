@@ -7,6 +7,9 @@ class GeneralCommand {
     this.usage = options.usage;
     this.examples = options.examples;
     this.hidden = options.hidden;
+    this.ownerOnly = options.ownerOnly;
+    this.nsfwOnly = options.nsfwOnly;
+    this.cooldown = options.cooldown;
   }
 }
 
