@@ -7,11 +7,10 @@
     "start": "node src/bot/index.js"
   },
   "dependencies": {
-    "eris": "^0.8.5",
-    "snekfetch": "^4.0.0",
-    "quick.db": "^6.2.1",
-    "path": "^0.12.7",
-    "i18n": "^0.8.3",
+    "canvas": "^2.0.0-alpha.12",
+    "canvas-constructor": "^1.0.1",
+    "dateformat": "^3.0.3",
+    "eris": "^0.8.6",
     "express": "^4.16.3",
     "fs-nextra": "^0.3.4",
     "i18n": "^0.8.3",
