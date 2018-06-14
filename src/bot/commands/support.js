@@ -11,7 +11,7 @@ class Support extends Command {
       description: 'Join Rieko\'s support server.',
       usage: '{{ prefix }}support',
       examples: [
-        'support'
+        '{{ prefix }}support'
       ],
       hidden: false,
       ownerOnly: false,
@@ -20,7 +20,6 @@ class Support extends Command {
     });
     this.bot = bot;
     this.db = db;
-    this.i18n = require('i18n');
   }
   
   load(msg) { 
@@ -28,7 +27,7 @@ class Support extends Command {
       embed: {
         title: msg.__('commands.support.title'),
         description: msg.__('commands.support.description'),
-        color: 0x34363C,
+        color: 0xFF0CDA,
         fields: [
           {
             name: msg.__('commands.support.fields.name'),

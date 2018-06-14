@@ -11,8 +11,8 @@ class Balance extends Command {
       description: 'Views a person\'s balance.',
       usage: '{{ prefix }}balance [user mention]',
       examples: [
-        'balance',
-        'balance @murf#414#'
+        '{{ prefix }}balance',
+        '{{ prefix }}balance @murf#4142'
       ],
       hidden: false,
       ownerOnly: false,
@@ -32,7 +32,7 @@ class Balance extends Command {
       }
       this.bot.manipulationManager.balance(msg, user, profile.balance, msg.channel.id);
     }).catch(() => {
-      msg.channel.createMessage(msg.__('commands.balance.unknown'));
+      msg.channel.createMessage(msg.__('commands.unknownUser'));
     });
   }
 }

@@ -11,7 +11,7 @@ class Eval extends Command {
       description: 'Evaluates some js code within the bot.',
       usage: '{{ prefix }}eval <js code>',
       examples: [
-        'eval this.bot.token'
+        '{{ prefix }}eval this.bot.token'
       ],
       hidden: true,
       ownerOnly: true,
@@ -20,7 +20,6 @@ class Eval extends Command {
     });
     this.bot = bot;
     this.db = db;
-    this.i18n = require('i18n');
   }
   
   async load(msg, args) {

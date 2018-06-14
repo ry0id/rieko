@@ -11,7 +11,7 @@ class Ping extends Command {
       description: 'Pong!',
       usage: '{{ prefix }}ping',
       examples: [
-        'ping'
+        '{{ prefix }}ping'
       ],
       hidden: false,
       ownerOnly: false,

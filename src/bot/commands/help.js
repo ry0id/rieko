@@ -12,8 +12,8 @@ class Help extends Command {
       description: 'Helps you by telling you all the commands or one specific command.',
       usage: '{{ prefix }}help [command]',
       examples: [
-        'help',
-        'help ping'
+        '{{ prefix }}help',
+        '{{ prefix }}help ping'
       ],
       hidden: false,
       ownerOnly: false,
@@ -22,46 +22,31 @@ class Help extends Command {
     });
     this.bot = bot;
     this.db = db;
-    this.i18n = require('i18n');
   }
   load(msg, args) {
     if (!args[0]) {
-      const categories = {};
-      const cate = { 
-        General: '<:ui_star:447130204557541376> General', 
-        Utility: '<:ui_i:447351491792207872> Utility',
-        Profile: '<:ui_person:447698416265461760> Profile',
-        Developer: '<:ui_settings:447870689823948807> Developer'
-      };
-      
-      if (msg.author.id !== '425004634587791380') {
-        this.bot.commands.filter(cmd => !cmd.hidden).forEach((cmd) => {
-          let category = categories[cmd.category];
-
-          if (!category) {
-            category = categories[cmd.category] = [];
-          }
-          category.push(cmd.command);
-        });
-      } else {
-        this.bot.commands.forEach((cmd) => {
-          let category = categories[cmd.category];
-          
-          if (!category) {
-            category = categories[cmd.category] = [];
-          }
-          category.push(cmd.command);
-        });
-      }
-      
+      const categories = [];
+      this.bot.commands.filter(cmd => !cmd.hidden).forEach((c) => {
+        const filter = categories.filter((f) => f.name.split(' • ')[0] === c.category);
+        if (filter.length > 0) {
+				  categories[categories.indexOf(filter[0])].value += ', `' + c.command + '`';
+			  } else {
+				  categories[categories.length] = {
+					  name: c.category + ' • ' + this.bot.commands.filter(cmd => cmd.category === c.category).length,
+					  value: '`' + c.command + '`',
+					  inline: false
+				  };
+			  }
+      });
+      categories.sort((a, b) => {
+			  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+			  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+			  return 0;
+		  });
       msg.channel.createMessage({
         embed: {
-          fields: Object.keys(categories).map((c) => ({
-            name: `${cate[c]}`,
-            value: `\`${categories[c].join('` `')}\``,
-            inline: true
-          })),
-          color: 0x34363C
+          fields: categories,
+          color: 0x0AF2FF
         }
       });
     } else {
@@ -91,7 +76,7 @@ class Help extends Command {
             },
             {
               name: 'Examples',
-              value: command.examples ? `\`${command.examples.join('` `')}\`` : 'None',
+              value: command.examples ? `\`${command.examples.join('`, `').replace(/{{ prefix }}/gi, msg.prefix)}\`` : 'None',
               inline: true
             },
             {
@@ -105,7 +90,7 @@ class Help extends Command {
               inline: true
             }
           ],
-          color: 0x34363C
+          color: 0xFF047
         }
       });
     }

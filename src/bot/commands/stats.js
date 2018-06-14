@@ -12,7 +12,7 @@ class Stats extends Command {
       description: 'Gives you information about Rieko.',
       usage: '{{ prefix }}stats',
       examples: [
-        'stats'
+        '{{ prefix }}stats'
       ],
       hidden: false,
       ownerOnly: false,
@@ -36,7 +36,11 @@ class Stats extends Command {
           },
           {
             name: msg.__('commands.stats.fields.two.name'),
-            value: `Guilds: ${this.bot.guilds.size}\nChannels: ${Object.keys(this.bot.channelGuildMap).length}\nUsers: ${this.bot.users.size}`,
+            value: msg.__('commands.stats.fields.two.value', {
+              guilds: this.bot.guilds.size,
+              chans: Object.keys(this.bot.channelGuildMap).length,
+              users: this.bot.users.size
+            }),
             inline: true
           },
           {
@@ -53,7 +57,7 @@ class Stats extends Command {
         footer: { 
           text: `${msg.__('commands.general_commands', { size: this.bot.commands.filter(c => !c.hidden).length })} | ${msg.__('commands.general_request', { username: msg.author.username, discrim: msg.author.discriminator})}` 
         },
-        color: 0x34363C
+        color: 0xFF0C0C
       }
     });
   }
