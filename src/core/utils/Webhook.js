@@ -1,17 +1,24 @@
-class WebhookClient {
-  constructor(token, id) {
-    this.token = token;
-    this.id = id;
-    this.snek = require("snekfetch");
-  }
+const snekfetch = require('snekfetch');
 
-  async send(args) {
-    this.snek.post(`https://discordapp.com/api/webhooks/${this.id}/${this.token}?wait=true`).send({
-      embeds: [
-        args
-      ]
-    }).end();
-  }
+class WebhookClient {
+	constructor(id, token) {
+		this._id = id;
+		this._token = token;
+	}
+
+	send(content) {
+		return new Promise((resolve, reject) => {
+			if (content instanceof Object) {
+				snekfetch.post('https://discordapp.com/api/webhooks/' + this._id + '/' + this._token + '?wait=true').send({
+					embeds: [
+						content
+					]
+				}).then(resolve.bind(this)).catch(reject.bind(this));
+			} else {
+				snekfetch.post('https://discordapp.com/api/webhooks/' + this._id + '/' + this._token + '?wait=true').send({ content }).then(resolve.bind(this)).catch(reject.bind(this));
+			}
+		});
+	}
 }
 
 module.exports = WebhookClient;

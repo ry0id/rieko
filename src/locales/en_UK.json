@@ -12,7 +12,7 @@
 			"description": "You want even more support with Rieko, look down to get help.",
 			"fields": {
 				"name": "<:ui_burger:447377504974667796> Link",
-				"value": "Support server: [Click me](https://discord.gg/8xAkM7u)"
+				"value": "Support Server: [Click me](https://discord.gg/8xAkM7u)"
 			}
 		},
 		"stats": {
@@ -22,7 +22,8 @@
 					"name": "<:ui_i:447351491792207872> Versions"
 				},
 				"two": {
-					"name": "<:ui_li:447380031870730271> Guild, Channels & Users"
+					"name": "<:ui_li:447380031870730271> Guild, Channels & Users",
+					"value": "Guilds: {{{ guilds }}}\nChannels: {{{ chans }}}\nUsers: {{{ users }}}"
 				},
 				"third": {
 					"name": "<:ui_graph:447381653694840842> Memory Usage"
@@ -33,15 +34,66 @@
 			}
 		},
 		"balance": {
-			"content": "<:ui_paper:447352551377993738> **{{{ username }}}#{{{ discrim }}}**'s balance",
-			"unknown": "<:ui_question:447456651998527499> Unable to find a user by that name"
+			"content": "<:ui_paper:447352551377993738> **{{{ username }}}#{{{ discrim }}}**'s balance"
 		},
 		"profile": {
-			"content": "<:ui_paper:447352551377993738> **{{{ username }}}#{{{ discrim }}}**'s profile",
-			"unknown": "<:ui_question:447456651998527499> Unable to find a user by that name"
+			"content": "<:ui_paper:447352551377993738> **{{{ username }}}#{{{ discrim }}}**'s profile"
 		},
+		"sloth": {
+			"content": "what a cute sloth *faints* /0"
+		},
+		"kiss": {
+			"u_content": "I'll kiss you <3",
+			"content": "{{{ author }}} kisses {{{ member }}}"
+		},
+		"poke": {
+			"u_content": "I'll poke you *wimp*",
+			"content": "{{{ author }}} pokes {{{ member }}}"
+		},
+		"cuddle": {
+			"u_content": "I'll cuddle you <3",
+			"content": "{{{ author }}} cuddles {{{ member }}}"
+		},
+		"feed": {
+			"u_content": "I'll feed you <3",
+			"content": "{{{ author }}} feeds {{{ member }}}"
+		},
+		"api": {
+			"rieko": "Powered by rieko.glitch.me",
+			"nekos_life": "Powered by nekos.life"
+		},
+		"unknownUser": "<:ui_question:447456651998527499> Unable to find a user by that name",
+		"general_error": "The command, {{{ command }}} just failed and it have been logged.",
 		"general_request": "Requested by {{{ username }}}#{{{ discrim }}}",
 		"general_commands": "{{{ size }}} Commands",
 		"general_notOwner": "<:ui_x:447144294415990789> What are you doing? Only murf is allowed to do this"
+	},
+	"events": {
+		"messageDelete": {
+			"embed": {
+				"title": "<:ui_bin:449918432566312960> A Message was Deleted in {{{ channel }}}!"
+			}
+		},
+		"guildBanAdd": {
+			"title": "Ban - Case {{{ case }}}"
+		},
+		"guildBanRemove": {
+			"title": "Unban - Case {{{ case }}}"
+		}
+	},
+	"website": {
+		"bio": "Rieko is the best Discord bot for all weebies and non-weebies",
+		"invite": "website.invite",
+		"api": {
+			"b": {
+				"missing": "whoops, you need to insert text and the text can't be over 200 characters",
+				"none": "owo, there isn't a b/B at all"
+			}
+		}
+	},
+	"words": {
+		"rieko": "Rieko",
+		"discord": "Discord",
+		"invite": "Invite"
 	}
 }
