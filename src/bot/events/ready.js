@@ -12,5 +12,13 @@ module.exports = (bot, db) => {
     console.log('|  _ <| |  __/   < (_) | ~|~ Channels: ' + Object.keys(bot.channelGuildMap).length);
     console.log('|_| \_\_|\___|_|\_\___/  ~|~ Commands: ' + bot.commands.size);
     console.log('|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_||_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_||_||_|_|_|_|_|_|');
+    bot.guilds.forEach((g) => {
+      g.members.forEach(async(m) => {
+        let user = await db.getUser(m.id);
+        if (!user) {
+          db.initUser(m.id);
+        }
+      });
+    });
   });
 };

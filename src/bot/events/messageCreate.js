@@ -1,11 +1,17 @@
 const i18n = require('i18n');
+const { Collection } = require('eris');
 
 module.exports = (bot, db) => {
   bot.on('messageCreate', async (msg) => {
     if (msg.author.bot || !bot.ready) return;
     let gDB = await db.getGuild(msg.channel.guild.id);
     if (!gDB) {
-      await db.initGuild(msg.channel.guild.id);
+      await db.initGuild(msg.channel.guild.id).catch((err) => {
+        console.log(err);
+        msg.channel.createMessage('An error occured when inserting you into the database. It\'s been logged.');
+      });
+      return msg.channel.createMessage('Inserting you back into the database.')
+      .then((m) => m.delete());
     }
     if (!msg.content.startsWith(gDB.prefix)) return;
     let prefix = gDB.prefix;
@@ -23,7 +29,9 @@ module.exports = (bot, db) => {
       try {
         commands[0].load(msg, args);
       } catch (err) {
-        msg.channel.createMessage(i18n.__('commands.general_error'));
+        msg.channel.createMessage(i18n.__('commands.general_error', {
+          command: command[0].command
+        }));
         console.log(`Command, ${commands[0].command}, failed and heres the error: ${err}`);
       }
     }
