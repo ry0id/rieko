@@ -1,0 +1,51 @@
+extends layout.pug
+
+block title
+    title #{__('words.rieko')}
+    
+block content
+    style.
+        body { background: 252525; }
+    section.fullscreen
+        div.background(style='background-image: url("assets/images/background.gif");')
+        .center-object
+            section.me
+                h1.title #{__('words.rieko')}
+                span.undertitle #{__('website.bio')}
+            .buttons
+                a.btn.animation.discord(href='/support') #{__('words.discord')}
+                a#trigger.btn.animation.emerald #{__('words.invite')}
+    
+    #modal.modal.modal--close
+        .modal-content
+            .box-container.alizarin#error
+                h1 Opps... You've made a mistake.
+                p 
+            span.close &times;
+            p #{__('website.invite')}
+            input.primary-text.white.container(type='text' name='id' id='id' style='height: 30px !important;' required)
+            br
+            a.btn.discord#guild(type='submit' href='#') Invite with ID
+            a.btn.emerald(type='submit' href='/invite') Invite without ID
+    
+    script.
+        var id = document.getElementById('id').value;
+        var x = document.getElementById("error");
+        x.style.display = 'none';
+        document.getElementById('guild').onclick = function() {
+          var errors = [];
+          if (typeof id !== 'string') {
+            errors.push('ID is not valid');
+          } else if (id.length > 25) {
+            errors.push('ID is too long');
+          } else if (/\D/.test(id)) {
+            errors.push('ID is not valid');
+          }
+          if (errors.length !== 0) {
+            x.style.display = 'block';
+            x.innerHTML = errors.join(', ');
+            return false;
+          }
+          window.location.replace(`/invite/${id}`);
+          return false;
+        }
