@@ -12,7 +12,8 @@ class Balance extends Command {
       usage: '{{ prefix }}balance [user mention]',
       examples: [
         '{{ prefix }}balance',
-        '{{ prefix }}balance @murf#4142'
+        '{{ prefix }}balance @murf#4142',
+        '{{ prefix }}balance @void#0001'
       ],
       hidden: false,
       ownerOnly: false,
